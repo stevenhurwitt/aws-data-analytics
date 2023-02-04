@@ -32,6 +32,25 @@ need aws access key/secret from console. can regenerate if needed. enable secret
 
 - install `python3`, `pip`, `setuptools`, `wheel`
 - `pip install -r requirements.txt`
+
+install python dependencies. can create conda env as well:
+
 - `conda env create -f env/twitter.yml`
 
-install python dependencies. can create conda env as well.
+this will created version controlled environment files for pip/conda.
+
+# to-do
+
+... in no particular order...
+
+- `main.py` updates and modifications
+- CI/CD w/ concourse??
+- github actions
+- py envs!
+- docker build
+    - dynamo
+    - postgres
+    - pyspark
+    - kafka
+    - jupyterlab
+- docker-compose up -d
