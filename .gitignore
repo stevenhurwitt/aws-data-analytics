@@ -13,6 +13,7 @@ postgres-db-volume/
 aws/
 .vscode
 cluster_config
+tmp
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
