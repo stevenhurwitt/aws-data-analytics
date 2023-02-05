@@ -10,7 +10,7 @@ ARG jupyterlab_version=3.5.2
 # copy dependencies
 COPY ./notebooks/ ${SHARED_WORKSPACE}/notebooks/
 COPY ./src ${SHARED_WORKSPACE}/src
-COPY ./env/ ${SHARED_WORKSPACE}/env/
+COPY ./env/requirements.txt ${SHARED_WORKSPACE}/env/requirements.txt
 
 # base python
 RUN apt-get --allow-releaseinfo-change update && \
@@ -37,10 +37,10 @@ RUN pip3 install pyspark==${spark_version} jupyterlab==${jupyterlab_version}
 # RUN pip3 install /opt/workspace/redditStreaming/src/main/python/reddit/dist/reddit-0.1.0-py3-none-any.whl --force-reinstall
 
 # requirements - pip (old)
-RUN pip3 install -r /opt/workspace/requirements.txt --ignore-installed
+RUN pip3 install -r /opt/workspace/env/requirements.txt --ignore-installed
 
 # create conda env
-RUN conda --help
+# RUN conda --help
 # RUN conda env create -n aws -f env/aws.yml
 
 # add kernel to jupyter
