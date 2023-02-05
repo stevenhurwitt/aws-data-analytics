@@ -28,7 +28,7 @@ def main():
     print(filepath)
 
     # creds.json
-    with open("./../creds.json", "r") as g:
+    with open("creds.json", "r") as g:
         creds = json.load(g)
         g.close()
 
