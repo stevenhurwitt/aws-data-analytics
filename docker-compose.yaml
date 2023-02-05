@@ -154,13 +154,13 @@ services:
     command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ."
 
   glue_history:
-    image: glue_history
+    image: stevenhurwitt/glue_history:latest
     container_name: glue_history
     restart: on-failure
 
-  # networks:
-  #   local-dynamodb:
-  #     name: local-dynamodb
+networks:
+  local-dynamodb:
+    name: local-dynamodb
   
   # redis:
   #     image: redis:latest
