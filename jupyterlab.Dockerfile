@@ -51,8 +51,8 @@ RUN python3 -m ipykernel install --user --name="aws"
 RUN rm -rf /var/lib/apt/lists/* && \
     mkdir root/.aws && \
     aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID} && \
-    aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY} && \
-    ln -s /usr/local/bin/python3 /usr/bin/python
+    aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
+    # ln -s /usr/local/bin/python3 /usr/bin/python
 
 # -- Layer: Outdated Guava JAR File
 
