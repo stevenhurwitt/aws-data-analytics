@@ -1,7 +1,7 @@
 import setuptools
 
 setuptools.setup(
-    name="main",
+    name="aws",
     version="1.0.0",
     author="steven hurwitt",
     author_email="stevenhurwitt@gmail.com",
