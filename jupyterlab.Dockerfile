@@ -26,22 +26,22 @@ RUN python3 -m venv /opt/workspace/reddit-env
     # source /opt/workspace/reddit-env/bin/activate
 
 # pyspark & jupyterlab - pip (old)
-# RUN pip3 install pyspark==${spark_version} jupyterlab==${jupyterlab_version}
+RUN pip3 install pyspark==${spark_version} jupyterlab==${jupyterlab_version}
 
 # -- Layer: Conda Environment
 
 # pyspark & jupyterlab - conda
-RUN conda install -c conda-forge pyspark==${spark_version} jupyterlab==${jupyterlab_version}
+# RUN conda install -c conda-forge pyspark==${spark_version} jupyterlab==${jupyterlab_version}
 
 # custom .whl's - pip (old)
 # RUN pip3 install /opt/workspace/redditStreaming/src/main/python/reddit/dist/reddit-0.1.0-py3-none-any.whl --force-reinstall
 
 # requirements - pip (old)
-# RUN pip3 install -r /opt/workspace/requirements.txt --ignore-installed
+RUN pip3 install -r /opt/workspace/requirements.txt --ignore-installed
 
 # create conda env
 RUN conda --help
-RUN conda env create -n aws -f env/aws.yml
+# RUN conda env create -n aws -f env/aws.yml
 
 # add kernel to jupyter
 RUN python3 -m ipykernel install --user --name="aws"
