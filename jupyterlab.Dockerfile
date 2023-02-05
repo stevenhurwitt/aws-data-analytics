@@ -8,10 +8,10 @@ ARG spark_version=3.3.1
 ARG jupyterlab_version=3.5.2
 
 # copy dependencies
-COPY ./notebooks/ ${SHARED_WORKSPACE}/notebooks/
-COPY ./src ${SHARED_WORKSPACE}/src
-COPY ./env/requirements.txt ${SHARED_WORKSPACE}/requirements.txt
-COPY ./env/aws.yml ${SHARED_WORKSPACE}/aws.yml
+COPY ./notebooks/ ${SHARED_WORKSPACE}/aws/notebooks/
+COPY ./src ${SHARED_WORKSPACE}/aws/src
+COPY ./env/requirements.txt ${SHARED_WORKSPACE}/aws/requirements.txt
+COPY ./env/aws.yml ${SHARED_WORKSPACE}/aws/aws.yml
 
 # base python
 RUN apt-get --allow-releaseinfo-change update && \
@@ -52,9 +52,9 @@ RUN pip3 install -r /opt/workspace/requirements.txt --ignore-installed
 
 # aws
 RUN rm -rf /var/lib/apt/lists/* && \
-    mkdir root/.aws && \
-    aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID} && \
-    aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
+    mkdir root/.aws
+    # aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID} && \
+    # aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
     # ln -s /usr/local/bin/python3 /usr/bin/python
 
 # -- Layer: Outdated Guava JAR File
@@ -69,7 +69,6 @@ RUN rm -rf /var/lib/apt/lists/* && \
 
 
 # -- Runtime
-
 EXPOSE 8888
 WORKDIR ${SHARED_WORKSPACE}
 CMD jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token=easy --NotebookApp.password=easy --notebook-dir=${SHARED_WORKSPACE}
