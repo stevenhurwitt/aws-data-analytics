@@ -3,9 +3,11 @@ An attempt to stream api data using kafka, process with spark, and store in s3 d
 
 ## Build dockerfiles
 
-Go to docker directory and run build script.
+Run build script to build dockerfiles.
 
 `./build.sh`
+
+Run docker-compose.
 
 `docker-compose up -d --no-recreate`
 
@@ -37,7 +39,7 @@ If there are kafka errors, run `docker-compose down`, delete `cluster_config/kaf
 # enhancements
 
 - lambda function to backup s3 to local daily (aws s3 sync...)
-- glue function for s3 to docker postgres (aws is $6 a day??? could use a smaller instance?)
+- glue function for s3 to docker postgres (aws is $2 a day???)
 - airflow to gracefully restart streaming and producer jobs as needed
 - could move from docker-compose local streaming app to cloud based
 - kubernetes cluster w/ raspberry pis and local pc
