@@ -1,12 +1,15 @@
 FROM cluster-base
+FROM continuumio/anaconda3:2020.11
 
-# -- Layer: JupyterLab
+# -- Layer: Python
 
+# set args
 ARG spark_version=3.3.1
 ARG jupyterlab_version=3.5.2
 
+# dependencies
 COPY ./notebooks/ ${SHARED_WORKSPACE}/notebooks/
-COPY ./requirements.txt ${SHARED_WORKSPACE}/
+COPY ./env/ ${SHARED_WORKSPACE}/env/
 
 # base python
 RUN apt-get update -y && \
@@ -14,29 +17,43 @@ RUN apt-get update -y && \
     curl https://bootstrap.pypa.io./get-pip.py | python3 && \
     python3 -m pip install --upgrade pip
 
-# virtualenv
+# virtualenv - pip venv
 RUN python3 -m venv /opt/workspace/reddit-env && \
     source /opt/workspace/reddit-env/bin/activate
 
-# pyspark & jupyterlab
-RUN pip3 install pyspark==${spark_version} jupyterlab==${jupyterlab_version}
+# pyspark & jupyterlab - pip
+# RUN pip3 install pyspark==${spark_version} jupyterlab==${jupyterlab_version}
 
-# custom .whl's
+# -- Layer: Conda Environment
+
+# pyspark & jupyterlab - conda
+RUN conda install -c conda-forge pyspark==${spark_version} jupyterlab==${jupyterlab_version}
+
+# custom .whl's - pip
 # RUN pip3 install /opt/workspace/redditStreaming/src/main/python/reddit/dist/reddit-0.1.0-py3-none-any.whl --force-reinstall
 
-# requirements
-RUN pip3 install -r /opt/workspace/requirements.txt --ignore-installed
+# requirements - conda
+# RUN pip3 install -r /opt/workspace/requirements.txt --ignore-installed
+RUN conda --help
+RUN conda env create -n aws -f env/aws.yml
 
 # add kernel to jupyter
-RUN python3 -m ipykernel install --user --name="reddit-env"
+RUN python3 -m ipykernel install --user --name="aws"
     
+# -- Layer: aws-cli
+
 # aws
 RUN rm -rf /var/lib/apt/lists/* && \
-    mkdir root/.aws
-    # aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID} && \
-    # aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
-    # ln -s /usr/local/bin/python3 /usr/bin/python
+    mkdir root/.aws && \
+    aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID} && \
+    aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY} && \
+    ln -s /usr/local/bin/python3 /usr/bin/python
 
+# -- Layer: Outdated Guava JAR File
+
+# this is fixed!!! yay
+# feel free to ignore commented code below:
+# 
 # deal w/ outdated pyspark guava jar for hadoop-aws (check maven repo for hadoop-common version)
 # RUN cd /usr/local/lib/python3.7/dist-packages/pyspark/jars/ && \
 #     rm guava-14.0.1.jar && \
