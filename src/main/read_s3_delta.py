@@ -23,7 +23,7 @@ def main():
     print("imported modules.")
 
     # S3 file path
-    bucket = "reddit-streaming-stevenhurwitt-new"
+    bucket = creds["bucket"]
     subreddit = "aws"
     filepath = os.path.join("s3a://", bucket, subreddit + "_clean")
     print(filepath)
