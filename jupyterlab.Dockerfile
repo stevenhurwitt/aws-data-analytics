@@ -21,8 +21,9 @@ RUN apt-get --allow-releaseinfo-change update && \
     python3 -m pip install --upgrade pip
 
 # virtualenv - pip venv
-RUN python3 -m venv /opt/workspace/reddit-env && \
-    source /opt/workspace/reddit-env/bin/activate
+RUN python3 -m venv /opt/workspace/reddit-env 
+    # && \
+    # source /opt/workspace/reddit-env/bin/activate
 
 # pyspark & jupyterlab - pip (old)
 # RUN pip3 install pyspark==${spark_version} jupyterlab==${jupyterlab_version}

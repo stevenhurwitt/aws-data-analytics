@@ -4,6 +4,10 @@
 # txt
 aws*.txt
 
+# docker-compose volumes
+dynamodata/
+postgres-db-volume/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

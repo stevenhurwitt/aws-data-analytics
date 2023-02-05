@@ -66,6 +66,7 @@ services:
       - shared-workspace:/opt/workspace
     depends_on:
       - spark-master
+
   postgres:
     image: postgres
     container_name: postgres
@@ -149,16 +150,12 @@ services:
     working_dir: /home/dynamodblocal
     command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ."
 
-# networks:
-#   local-dynamodb:
-#     name: local-dynamodb
-
   # postgres:
   #   image: postgres:13
   #   environment:
-  #     POSTGRES_USER: airflow
-  #     POSTGRES_PASSWORD: ecret!12345
-  #     POSTGRES_DB: airflow
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: Secret!12345
+  #     POSTGRES_DB: aws
   #   volumes:
   #     - postgres-db-volume:/var/lib/postgresql/data
   #   healthcheck:
@@ -170,6 +167,9 @@ services:
   #   ports: 
   #     - "5432:5432"
 
+  # networks:
+  #   local-dynamodb:
+  #     name: local-dynamodb
   # ganglia:
   #   image: kurthuwig/ganglia:latest
   #   container_name: ganglia
