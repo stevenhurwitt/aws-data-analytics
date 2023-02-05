@@ -11,6 +11,8 @@ volumes:
     driver: local
   dynamodata-aws:
     driver: local
+  src:
+    driver: local
 services:
   jupyterlab:
     image: jupyterlab
