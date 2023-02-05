@@ -10,6 +10,8 @@ src/main/config.yaml
 # docker-compose volumes
 dynamodata/
 postgres-db-volume/
+aws/
+.vscode
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
