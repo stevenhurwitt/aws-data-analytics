@@ -7,12 +7,15 @@ FROM continuumio/anaconda3:2020.11
 ARG spark_version=3.3.1
 ARG jupyterlab_version=3.5.2
 
-# dependencies
+# copy dependencies
 COPY ./notebooks/ ${SHARED_WORKSPACE}/notebooks/
+COPY ./src ${SHARED_WORKSPACE}/src
 COPY ./env/ ${SHARED_WORKSPACE}/env/
 
 # base python
-RUN apt-get update -y && \
+RUN apt-get --allow-releaseinfo-change update && \
+    apt-get update -y && \
+    apt-get upgrade -y && \
     apt-get install -y python3-dev python3-distutils python3-setuptools python3-venv && \
     curl https://bootstrap.pypa.io./get-pip.py | python3 && \
     python3 -m pip install --upgrade pip
@@ -21,7 +24,7 @@ RUN apt-get update -y && \
 RUN python3 -m venv /opt/workspace/reddit-env && \
     source /opt/workspace/reddit-env/bin/activate
 
-# pyspark & jupyterlab - pip
+# pyspark & jupyterlab - pip (old)
 # RUN pip3 install pyspark==${spark_version} jupyterlab==${jupyterlab_version}
 
 # -- Layer: Conda Environment
@@ -29,11 +32,13 @@ RUN python3 -m venv /opt/workspace/reddit-env && \
 # pyspark & jupyterlab - conda
 RUN conda install -c conda-forge pyspark==${spark_version} jupyterlab==${jupyterlab_version}
 
-# custom .whl's - pip
+# custom .whl's - pip (old)
 # RUN pip3 install /opt/workspace/redditStreaming/src/main/python/reddit/dist/reddit-0.1.0-py3-none-any.whl --force-reinstall
 
-# requirements - conda
+# requirements - pip (old)
 # RUN pip3 install -r /opt/workspace/requirements.txt --ignore-installed
+
+# create conda env
 RUN conda --help
 RUN conda env create -n aws -f env/aws.yml
 
