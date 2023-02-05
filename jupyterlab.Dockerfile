@@ -18,8 +18,9 @@ RUN apt-get --allow-releaseinfo-change update && \
     apt-get update -y && \
     apt-get upgrade -y
 
-RUN apt-get install -y python3-dev python3-distutils python3-setuptools python3-venv && \
-    curl https://bootstrap.pypa.io./get-pip.py | python3 && \
+RUN apt-get install -y python3-dev python3-distutils python3-setuptools python3-venv
+
+RUN curl https://bootstrap.pypa.io./get-pip.py | python3 && \
     python3 -m pip install --upgrade pip
 
 # virtualenv - pip venv
