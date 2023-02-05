@@ -5,7 +5,7 @@ creds.json
 aws*.txt
 
 # config.yaml
-src/main/config.yaml
+config.yaml
 
 # docker-compose volumes
 dynamodata/
