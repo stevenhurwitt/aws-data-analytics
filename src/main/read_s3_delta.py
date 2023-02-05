@@ -2,6 +2,7 @@ import os
 import ast
 import logging
 import pprint
+import yaml
 import json
 import time
 from pyspark.sql import *
@@ -32,8 +33,16 @@ def main():
         creds = json.load(g)
         g.close()
 
+    # config.yaml
+    with open("config.yaml", "r") as h:
+        config = yaml.safe_load(h)
+        h.close()
+
     print("creds.json keys: ")
     pp.pprint([k for k in creds.keys()])
+
+    print("config.yaml keys: ")
+    pp.pprint([k for k in config.keys()])
 
     spark_host = creds["spark_host"]
     spark_port = creds["spark_port"]
@@ -77,6 +86,20 @@ def main():
     sc.setLogLevel("WARN")
     # sc.setLocalProperty("spark.scheduler.pool", "pool{}".format(str(index)))
     print("imported modules, created spark.")
+
+    # s3 bucket
+    bucket_name = "reddit-streaming-stevenhurwitt-new"
+    reddit_bucket = s3.list_objects_v2(Bucket = bucket_name)
+    for my_bucket_object in reddit_bucket.objects.all():
+        print(my_bucket_object.key)
+
+    # athena
+    # athena_response = athena.get_query_results(QueryExecutionId = "")
+    # print(athena_response)
+
+    # glue
+    # glue_response = glue.get_job()
+    # print(glue_response)
 
     # read spark df
     df = spark.read.format("delta").option("header", True).load(filepath)
