@@ -75,7 +75,7 @@ services:
       - "5432:5432"
     environment: 
       - POSTGRES_USER=steven
-      - POSTGRES_PASSWORD=secret!1234
+      - POSTGRES_PASSWORD=Secret!12345
   zookeeper:
     # image: wurstmeister/zookeeper
     image: ghcr.io/arm64-compat/confluentinc/cp-zookeeper:7.1.1

@@ -4,6 +4,9 @@
 # txt
 aws*.txt
 
+# config.yaml
+src/main/config.yaml
+
 # docker-compose volumes
 dynamodata/
 postgres-db-volume/
