@@ -10,7 +10,8 @@ ARG jupyterlab_version=3.5.2
 # copy dependencies
 COPY ./notebooks/ ${SHARED_WORKSPACE}/notebooks/
 COPY ./src ${SHARED_WORKSPACE}/src
-COPY ./env/requirements.txt ${SHARED_WORKSPACE}/env/requirements.txt
+COPY ./env/requirements.txt ${SHARED_WORKSPACE}/requirements.txt
+COPY ./env/aws.yml ${SHARED_WORKSPACE}/aws.yml
 
 # base python
 RUN apt-get --allow-releaseinfo-change update && \
