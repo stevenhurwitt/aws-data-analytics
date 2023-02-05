@@ -153,6 +153,11 @@ services:
     working_dir: /home/dynamodblocal
     command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ."
 
+  glue_history:
+    image: glue_history
+    container_name: glue_history
+    restart: on-failure
+
   # postgres:
   #   image: postgres:13
   #   environment:
