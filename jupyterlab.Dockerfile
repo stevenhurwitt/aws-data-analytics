@@ -16,8 +16,9 @@ COPY ./env/ ${SHARED_WORKSPACE}/
 # base python
 RUN apt-get --allow-releaseinfo-change update && \
     apt-get update -y && \
-    apt-get upgrade -y && \
-    apt-get install -y python3-dev python3-distutils python3-setuptools python3-venv && \
+    apt-get upgrade -y
+
+RUN apt-get install -y python3-dev python3-distutils python3-setuptools python3-venv && \
     curl https://bootstrap.pypa.io./get-pip.py | python3 && \
     python3 -m pip install --upgrade pip
 
@@ -45,7 +46,7 @@ RUN pip3 install -r /opt/workspace/requirements.txt --ignore-installed
 # RUN conda env create -n aws -f env/aws.yml
 
 # add kernel to jupyter
-RUN python3 -m ipykernel install --user --name="aws"
+# RUN python3 -m ipykernel install --user --name="aws"
     
 # -- Layer: aws-cli
 
