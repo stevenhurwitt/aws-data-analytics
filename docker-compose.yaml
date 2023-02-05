@@ -25,7 +25,7 @@ services:
       - AWS_ACCESS_KEY_ID=aws_access_key_id
       - AWS_SECRET_ACCESS_KEY=aws_secret_access_key
     ports:
-      - 8898:8888
+      - 8899:8888
     volumes:
       - shared-workspace-aws:/opt/workspace/aws
       - ./:/opt/workspace/
@@ -35,9 +35,9 @@ services:
     container_name: aws_spark-master
     hostname: spark-master
     ports:
-      - 8081:8080
-      - 7078:7077
-      - 4050:4040
+      - 8080:8080
+      - 7077:7077
+      - 4040:4040
     volumes:
       - shared-workspace-aws:/opt/workspace/aws
   spark-worker-1:
@@ -47,9 +47,9 @@ services:
       - SPARK_WORKER_CORES=4
       - SPARK_WORKER_MEMORY=8192m
     ports:
-      - 4044:4040
-      - 8084:8081
-      - 18084:18080
+      - 4041:4040
+      - 8081:8081
+      - 18081:18080
     volumes:
       - shared-workspace-aws:/opt/workspace/aws
     depends_on:
@@ -61,9 +61,9 @@ services:
       - SPARK_WORKER_CORES=4
       - SPARK_WORKER_MEMORY=8192m
     ports:
-      - 4046:4040
-      - 8087:8082
-      - 18087:18080
+      - 4042:4040
+      - 8082:8082
+      - 18082:18080
     volumes:
       - shared-workspace-aws:/opt/workspace/aws
     depends_on:
@@ -74,7 +74,7 @@ services:
     container_name: aws_postgres
     hostname: postgres
     ports: 
-      - "5434:5432"
+      - "5432:5432"
     environment: 
       - POSTGRES_USER=steven
       - POSTGRES_PASSWORD=Secret!1234]
@@ -89,7 +89,7 @@ services:
     # networks:
     #   - reddit_streaming
     ports:
-      - "2182:2181"
+      - "2181:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
     restart: always
@@ -104,7 +104,7 @@ services:
     # networks:
     #   - reddit_streaming
     ports:
-      - "9093:9092"
+      - "9092:9092"
     environment:
       # KAFKA_ADVERTISED_HOST_NAME: 192.168.50.248 #ip of macbook
       KAFKA_ADVERTISED_HOST_NAME: 192.168.50.114  #ip of desktop
@@ -139,7 +139,7 @@ services:
         kafka:
           brokers: ["192.168.50.114:9092"]
     ports:
-      - "8086:8080"
+      - "8085:8080"
     depends_on:
       - kafka
 
@@ -149,7 +149,7 @@ services:
     networks:
       - local-dynamodb
     ports:
-      - "8002:8000"
+      - "8000:8000"
     volumes:
       - dynamodata-aws:/home/dynamodblocal
     working_dir: /home/dynamodblocal
