@@ -16,7 +16,7 @@ volumes:
 services:
   jupyterlab:
     image: jupyterlab
-    container_name: jupyterlab
+    container_name: aws_jupyterlab
     secrets:
       - aws_access_key_id
       - aws_secret_access_key
@@ -32,38 +32,38 @@ services:
     read_only: false
   spark-master:
     image: spark-master
-    container_name: spark-master
+    container_name: aws_spark-master
     hostname: spark-master
     ports:
-      - 8080:8080
-      - 7077:7077
-      - 4040:4040
+      - 8081:8080
+      - 7078:7077
+      - 4050:4040
     volumes:
       - shared-workspace-aws:/opt/workspace/aws
   spark-worker-1:
     image: spark-worker
-    container_name: spark-worker-1
+    container_name: aws_spark-worker-1
     environment:
       - SPARK_WORKER_CORES=4
       - SPARK_WORKER_MEMORY=8192m
     ports:
-      - 4041:4040
-      - 8083:8081
-      - 18081:18080
+      - 4044:4040
+      - 8084:8081
+      - 18084:18080
     volumes:
       - shared-workspace-aws:/opt/workspace/aws
     depends_on:
       - spark-master
   spark-worker-2:
     image: spark-worker
-    container_name: spark-worker-2
+    container_name: aws_spark-worker-2
     environment:
       - SPARK_WORKER_CORES=4
       - SPARK_WORKER_MEMORY=8192m
     ports:
-      - 4042:4040
-      - 8082:8082
-      - 18082:18080
+      - 4046:4040
+      - 8087:8082
+      - 18087:18080
     volumes:
       - shared-workspace-aws:/opt/workspace/aws
     depends_on:
@@ -71,10 +71,10 @@ services:
 
   postgres:
     image: postgres
-    container_name: postgres
+    container_name: aws_postgres
     hostname: postgres
     ports: 
-      - "5432:5432"
+      - "5434:5432"
     environment: 
       - POSTGRES_USER=steven
       - POSTGRES_PASSWORD=Secret!1234]
@@ -84,12 +84,12 @@ services:
   zookeeper:
     # image: wurstmeister/zookeeper
     image: ghcr.io/arm64-compat/confluentinc/cp-zookeeper:7.1.1
-    container_name: zookeeper
+    container_name: aws_zookeeper
     hostname: zookeeper
     # networks:
     #   - reddit_streaming
     ports:
-      - "2181:2181"
+      - "2182:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
     restart: always
@@ -99,12 +99,12 @@ services:
   kafka:
     # image: wurstmeister/kafka
     image: ghcr.io/arm64-compat/confluentinc/cp-kafka:7.1.1
-    container_name: kafka
+    container_name: aws_kafka
     hostname: kafka
     # networks:
     #   - reddit_streaming
     ports:
-      - "9092:9092"
+      - "9093:9092"
     environment:
       # KAFKA_ADVERTISED_HOST_NAME: 192.168.50.248 #ip of macbook
       KAFKA_ADVERTISED_HOST_NAME: 192.168.50.114  #ip of desktop
@@ -129,7 +129,7 @@ services:
 
   kowl:
     image: docker.redpanda.com/vectorized/console:master-217260f
-    container_name: redpanda_console
+    container_name: aws_redpanda_console
     restart: on-failure
     entrypoint: /bin/sh
     command: -c "echo \"$$CONSOLE_CONFIG_FILE\" > /tmp/config.yml; /app/console"
@@ -139,28 +139,28 @@ services:
         kafka:
           brokers: ["192.168.50.114:9092"]
     ports:
-      - "8085:8080"
+      - "8086:8080"
     depends_on:
       - kafka
 
   dynamo:
-    container_name: local-dynamodb
+    container_name: aws_local-dynamodb
     image: amazon/dynamodb-local
     networks:
       - local-dynamodb
     ports:
-      - "8000:8000"
+      - "8002:8000"
     volumes:
       - dynamodata-aws:/home/dynamodblocal
     working_dir: /home/dynamodblocal
     command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ."
 
-  glue_history:
-    image: stevenhurwitt/glue_history:latest
-    container_name: glue_history
-    restart: on-failure
-    volumes:
-      - src:/opt/workspace/aws/src
+  # glue_history:
+  #   image: stevenhurwitt/glue_history:latest
+  #   container_name: glue_history
+  #   restart: on-failure
+  #   volumes:
+  #     - src:/opt/workspace/aws/src
 
 networks:
   local-dynamodb:
