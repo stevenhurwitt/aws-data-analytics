@@ -39,7 +39,7 @@ RUN pip3 install pyspark==${spark_version} jupyterlab==${jupyterlab_version}
 # RUN pip3 install /opt/workspace/redditStreaming/src/main/python/reddit/dist/reddit-0.1.0-py3-none-any.whl --force-reinstall
 
 # requirements - pip (old)
-RUN pip3 install -r /opt/workspace/requirements.txt --ignore-installed
+RUN pip3 install -r /opt/workspace/aws/requirements.txt --ignore-installed
 
 # create conda env
 # RUN conda --help
