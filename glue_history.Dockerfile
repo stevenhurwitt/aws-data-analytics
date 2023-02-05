@@ -26,4 +26,6 @@ spark.eventLog.enabled                      true\n\
 spark.history.ui.port                       18080\n\
 ' > /opt/spark/conf/spark-defaults.conf
 
-ENTRYPOINT ["/bin/bash", "-c"]:
+ENV SPARK_NO_DAEMONIZE TRUE
+
+ENTRYPOINT ["/opt/spark/sbin/start-history-server.sh"]

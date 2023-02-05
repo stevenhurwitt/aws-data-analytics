@@ -157,6 +157,8 @@ services:
     image: stevenhurwitt/glue_history:latest
     container_name: glue_history
     restart: on-failure
+    volumes:
+      - src:/opt/workspace/aws/src
 
 networks:
   local-dynamodb:
