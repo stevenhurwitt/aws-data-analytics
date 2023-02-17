@@ -155,25 +155,25 @@ services:
     working_dir: /home/dynamodblocal
     command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ."
 
-  # glue_history:
-  #   image: stevenhurwitt/glue_history:latest
-  #   container_name: glue_history
-  #   restart: on-failure
-  #   volumes:
-  #     - src:/opt/workspace/aws/src
+  glue_history:
+    image: stevenhurwitt/glue_history:latest
+    container_name: glue_history
+    restart: on-failure
+    volumes:
+      - src:/opt/workspace/aws/src
 
 networks:
   local-dynamodb:
     name: local-dynamodb
   
-  # redis:
-  #     image: redis:latest
-  #     expose:
-  #       - 6379
-  #     healthcheck:
-  #       test: ["CMD", "redis-cli", "ping"]
-  #       interval: 5s
-  #       timeout: 30s
-  #       retries: 50
-  #     restart: always
+  redis:
+      image: redis:latest
+      expose:
+        - 6379
+      healthcheck:
+        test: ["CMD", "redis-cli", "ping"]
+        interval: 5s
+        timeout: 30s
+        retries: 50
+      restart: always
 

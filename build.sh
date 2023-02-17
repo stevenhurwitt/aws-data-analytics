@@ -14,9 +14,9 @@ JUPYTERLAB_VERSION="3.5.2"
 
 # ,docker build --build-arg spark_version="${SPARK_VERSION}" --build-arg jupyterlab_version="${JUPYTERLAB_VERSION}" -f jupyterlab.Dockerfile -t jupyterlab .
 
-# docker build \
-#   -f glue_history.Dockerfile \
-#   -t stevenhurwitt/glue_history:latest .
+docker build \
+  -f glue_history.Dockerfile \
+  -t stevenhurwitt/glue_history:latest .
 
 docker build \
   -f cluster-base.Dockerfile \
