@@ -19,5 +19,5 @@ jobs:
         run: python3 --version && pip --version
       - name: build aws
         run: python3 ./src/setup.py bdist_wheel
-      - name: install reddit
-        run: pip3 install src/dist/aws-1.0.0-py3-none-any.whl --force-reinstall
+      # - name: install reddit
+      #   run: pip3 install src/dist/aws-1.0.0-py3-none-any.whl --force-reinstall
