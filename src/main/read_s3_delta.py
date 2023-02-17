@@ -94,16 +94,20 @@ def main():
         print(my_bucket_object.key)
 
     # athena
-    # athena_response = athena.get_query_results(QueryExecutionId = "")
-    # print(athena_response)
+    athena_response = athena.get_query_results(QueryExecutionId = "")
+    print(athena_response)
 
     # glue
-    # glue_response = glue.get_job()
-    # print(glue_response)
+    glue_response = glue.list_jobs()
+    print(glue_response)
 
     # read spark df
     df = spark.read.format("delta").option("header", True).load(filepath)
     df.show()
+
+    # write df
+    write_path = "s3a://" + bucket + "/" + subreddit + "_clean/"
+    # df.write.format("delta").option("header", True).save(write_path)
 
 
 if __name__ == "__main__":

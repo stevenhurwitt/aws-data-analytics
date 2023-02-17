@@ -17,7 +17,7 @@ jobs:
         run: sudo apt-get install python3 python3-pip python3-virtualenv
       - name: versions
         run: python3 --version && pip --version
-      - name: build reddit
-        run: python3 ./src/main/setup.py bdist_wheel
-      - name: install reddit
-        run: pip3 install src/main/dist/aws-1.0.0-py3-none-any.whl --force-reinstall
+      - name: build aws
+        run: python3 ./src/setup.py bdist_wheel
+      # - name: install reddit
+      #   run: pip3 install src/dist/aws-1.0.0-py3-none-any.whl --force-reinstall
