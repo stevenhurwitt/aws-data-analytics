@@ -15,7 +15,7 @@ JUPYTERLAB_VERSION="3.5.2"
 # ,docker build --build-arg spark_version="${SPARK_VERSION}" --build-arg jupyterlab_version="${JUPYTERLAB_VERSION}" -f jupyterlab.Dockerfile -t jupyterlab .
 
 docker build \
-  -f src/lambda/lambda.Dockerfile \
+  -f lambda.Dockerfile \
   -t stevenhurwitt/lambda:latest .
 
 docker build \

@@ -162,18 +162,13 @@ services:
     volumes:
       - src:/opt/workspace/aws/src
 
+  lambda:
+    image: stevenhurwitt/lambda:latest
+    container_name: lambda
+    restart: on-failure
+    volumes:
+      - src:/opt/workspace/src
+
 networks:
   local-dynamodb:
     name: local-dynamodb
-  
-  redis:
-      image: redis:latest
-      expose:
-        - 6379
-      healthcheck:
-        test: ["CMD", "redis-cli", "ping"]
-        interval: 5s
-        timeout: 30s
-        retries: 50
-      restart: always
-
