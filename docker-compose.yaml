@@ -173,14 +173,14 @@ services:
     container_name: glue_history
     restart: on-failure
     volumes:
-      - src:/opt/workspace/src
+      - src:/opt/workspace/aws/src
 
   lambda:
     image: stevenhurwitt/lambda:latest
     container_name: lambda
     restart: on-failure
     volumes:
-      - src:/opt/workspace/src
+      - src:/opt/workspace/aws/src
 
 networks:
   local-dynamodb:
