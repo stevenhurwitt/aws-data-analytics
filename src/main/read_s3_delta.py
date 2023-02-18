@@ -107,7 +107,7 @@ def main():
 
     # write df
     write_path = "s3a://" + bucket + "/" + subreddit + "_clean/"
-    # df.write.format("delta").option("header", True).save(write_path)
+    df.write.format("delta").option("header", True).save(write_path)
 
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@ FROM continuumio/anaconda3:2020.11
 # -- Layer: Python
 
 # set args
-ARG spark_version=3.3.1
+ARG spark_version=3.3.2
 ARG jupyterlab_version=3.5.2
 
 # copy dependencies
