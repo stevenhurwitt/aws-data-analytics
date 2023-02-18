@@ -24,7 +24,7 @@ RUN curl https://bootstrap.pypa.io./get-pip.py | python3 && \
     python3 -m pip install --upgrade pip
 
 # virtualenv - pip venv
-RUN python3 -m venv /opt/workspace/reddit-env 
+RUN python3 -m venv /opt/workspace/aws-env 
     # && \
     # source /opt/workspace/reddit-env/bin/activate
 
