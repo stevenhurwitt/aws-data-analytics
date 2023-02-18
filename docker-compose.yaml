@@ -25,8 +25,8 @@ volumes:
 services:
 
   jupyterlab:
-    image: jupyterlab
-    container_name: aws_jupyterlab
+    image: stevenhurwitt/jupyterlab:latest
+    container_name: jupyterlab
     secrets:
       - aws_access_key_id
       - aws_secret_access_key
@@ -42,8 +42,8 @@ services:
     read_only: false
 
   spark-master:
-    image: spark-master
-    container_name: aws_spark-master
+    image: stevenhurwitt/spark-master:latest
+    container_name: spark-master
     hostname: spark-master
     ports:
       - 8080:8080
@@ -53,8 +53,8 @@ services:
       - shared-workspace-aws:/opt/workspace/aws
 
   spark-worker-1:
-    image: spark-worker
-    container_name: aws_spark-worker-1
+    image: stevenhurwitt/spark-worker:latest
+    container_name: spark-worker-1
     environment:
       - SPARK_WORKER_CORES=4
       - SPARK_WORKER_MEMORY=8192m
@@ -68,8 +68,8 @@ services:
       - spark-master
 
   spark-worker-2:
-    image: spark-worker
-    container_name: aws_spark-worker-2
+    image: stevenhurwitt/spark-worker:latest
+    container_name: spark-worker-2
     environment:
       - SPARK_WORKER_CORES=4
       - SPARK_WORKER_MEMORY=8192m
@@ -83,8 +83,8 @@ services:
       - spark-master
 
   postgres:
-    image: postgres
-    container_name: aws_postgres
+    image: stevenhurwitt/postgres:latest
+    container_name: postgres
     hostname: postgres
     ports: 
       - "5432:5432"
@@ -157,7 +157,7 @@ services:
       - kafka
 
   dynamo:
-    container_name: aws_local-dynamodb
+    container_name: local-dynamodb
     image: amazon/dynamodb-local
     networks:
       - local-dynamodb
@@ -173,7 +173,7 @@ services:
     container_name: glue_history
     restart: on-failure
     volumes:
-      - src:/opt/workspace/aws/src
+      - src:/opt/workspace/src
 
   lambda:
     image: stevenhurwitt/lambda:latest

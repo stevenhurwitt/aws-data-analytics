@@ -4,6 +4,10 @@ JUPYTERLAB_VERSION="3.5.2"
 
 # -- Building the Images
 
+# docker build -f lambda.Dockerfile -t stevenhurwitt/lambda:latest .
+
+# docker build -f glue_history.Dockerfile -t stevenhurwitt/glue_history:latest .
+
 # docker build -f cluster-base.Dockerfile -t cluster-base .
 
 # docker build --build-arg spark_version="${SPARK_VERSION}" --build-arg hadoop_version="${HADOOP_VERSION}" -f spark-base.Dockerfile -t spark-base .
