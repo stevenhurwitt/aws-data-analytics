@@ -185,4 +185,3 @@ services:
 networks:
   local-dynamodb:
     name: local-dynamodb
-
