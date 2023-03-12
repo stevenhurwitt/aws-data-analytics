@@ -18,6 +18,7 @@ jupyter
 jupyterlab
 jupyter_client
 jupyter_core
+kafka-python
 matplotlib-inline
 nest-asyncio==1.5.6
 numexpr
@@ -38,7 +39,7 @@ pycparser
 Pygments==2.14.0
 pyOpenSSL
 PySocks
-pyspark
+pyspark==3.3.2
 python-dateutil
 pytz
 pyzmq==25.0.0
