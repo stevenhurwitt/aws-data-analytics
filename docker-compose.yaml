@@ -83,7 +83,7 @@ services:
       - spark-master
 
   postgres:
-    image: stevenhurwitt/postgres:latest
+    image: postgres:latest
     container_name: postgres
     hostname: postgres
     ports: 
@@ -175,12 +175,12 @@ services:
     volumes:
       - src:/opt/workspace/aws/src
 
-  lambda:
-    image: stevenhurwitt/lambda:latest
-    container_name: lambda
-    restart: on-failure
-    volumes:
-      - src:/opt/workspace/aws/src
+  # lambda:
+  #   image: stevenhurwitt/lambda:latest
+  #   container_name: lambda
+  #   restart: on-failure
+  #   volumes:
+  #     - src:/opt/workspace/aws/src
 
 networks:
   local-dynamodb:
