@@ -10,7 +10,7 @@ ARG jupyterlab_version=3.5.2
 # copy dependencies
 COPY ./notebooks/ ${SHARED_WORKSPACE}/aws/notebooks/
 COPY ./src ${SHARED_WORKSPACE}/aws/src
-COPY ./env/requirements.txt ${SHARED_WORKSPACE}/aws/requirements.txt
+COPY ./env/requirements.txt ${SHARED_WORKSPACE}/aws/src/requirements.txt
 COPY ./env/aws.yml ${SHARED_WORKSPACE}/aws/aws.yml
 
 # base python
